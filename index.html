@@ -1,12 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOVE AND LIES | Cyber Awareness Workshop</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --blood-red: #880808;
@@ -63,8 +64,13 @@
         }
 
         @keyframes pulseGrid {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         /* --- Navigation --- */
@@ -91,9 +97,9 @@
         }
 
         .nav-hashtag {
-            font-weight: 900; 
-            font-size: 0.75rem; 
-            letter-spacing: 2px; 
+            font-weight: 900;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             color: var(--cyber-blue);
             border: 1px solid var(--cyber-blue);
             padding: 4px 10px;
@@ -113,12 +119,12 @@
         }
 
         .hero-label {
-            text-transform: uppercase; 
-            font-weight: 900; 
-            letter-spacing: 5px; 
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 5px;
             margin-bottom: 20px;
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             border-bottom: 2px solid var(--neon-pink);
             padding-bottom: 5px;
         }
@@ -144,7 +150,7 @@
             font-size: 0.25em;
             background: transparent;
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 5px 20px;
             display: inline-block;
             vertical-align: middle;
@@ -183,12 +189,32 @@
         }
 
         @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); transform: translate(-3px, 3px) }
-            40% { clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%); transform: translate(3px, -3px) }
-            60% { clip-path: polygon(0 60%, 100% 60%, 100% 90%, 0 90%); transform: translate(-3px, 3px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+                transform: translate(-3px, 3px)
+            }
+
+            40% {
+                clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%);
+                transform: translate(3px, -3px)
+            }
+
+            60% {
+                clip-path: polygon(0 60%, 100% 60%, 100% 90%, 0 90%);
+                transform: translate(-3px, 3px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
         }
 
         .hero-sub {
@@ -227,8 +253,13 @@
         }
 
         @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
         /* --- Buttons --- */
@@ -262,7 +293,10 @@
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--neon-pink);
             z-index: -1;
             transform: translateX(-100%);
@@ -323,11 +357,9 @@
             position: relative;
             transition: 0.3s;
             /* Cyber cut corners */
-            clip-path: polygon(
-                20px 0, 100% 0, 
-                100% calc(100% - 20px), calc(100% - 20px) 100%, 
-                0 100%, 0 20px
-            );
+            clip-path: polygon(20px 0, 100% 0,
+                    100% calc(100% - 20px), calc(100% - 20px) 100%,
+                    0 100%, 0 20px);
         }
 
         .glass-card:hover {
@@ -339,14 +371,19 @@
         .glass-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 20px; height: 20px;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
             border-top: 2px solid var(--neon-pink);
             border-left: 2px solid var(--neon-pink);
             opacity: 0;
             transition: 0.3s;
         }
-        
-        .glass-card:hover::before { opacity: 1; }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
 
         .card-title {
             font-weight: 900;
@@ -357,15 +394,15 @@
         }
 
         .card-text {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.95rem;
         }
 
         /* --- Speaker Styles --- */
         .speaker-box {
             position: relative;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
             text-align: left;
             transition: 0.3s;
@@ -446,32 +483,42 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-20px) rotate(10deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
         }
 
         footer {
             padding: 60px 20px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             background: linear-gradient(to top, #000, rgba(5, 0, 1, 0));
         }
-        
+
         .footer-logo {
             height: 40px;
             opacity: 0.7;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
         }
 
         .copyright {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
     </style>
 </head>
+
 <body>
+
+    <canvas id="cyber-rain" style="position: fixed; inset: 0; z-index: -1; opacity: 0.4;"></canvas>
 
     <div class="bg-fx">
         <div class="heart-grid"></div>
@@ -483,7 +530,8 @@
             <span class="nav-hashtag">#DECODEKOZHIKODE</span>
         </div>
         <div>
-            <a href="login.html" style="text-decoration: none; color: #fff; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+            <a href="login.html"
+                style="text-decoration: none; color: #fff; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
                 <i data-lucide="lock" size="16" style="color: var(--neon-pink);"></i> Login
             </a>
         </div>
@@ -498,25 +546,50 @@
                 <span class="lies">Lies</span>
             </h1>
         </div>
-        
+
+        <!-- COUNTDOWN TIMER -->
+        <div id="countdown"
+            style="display: flex; gap: 20px; font-family: 'Archivo Black', sans-serif; margin: 30px 0; font-size: 1.5rem; color: #fff;">
+            <div style="text-align: center;">
+                <span id="cd-days" style="color: var(--neon-pink); display: block; font-size: 2rem;">00</span>
+                <span style="font-size: 0.6rem; letter-spacing: 2px; color: var(--cyber-blue);">DAYS</span>
+            </div>
+            <div style="text-align: center;">
+                <span id="cd-hours" style="color: var(--neon-pink); display: block; font-size: 2rem;">00</span>
+                <span style="font-size: 0.6rem; letter-spacing: 2px; color: var(--cyber-blue);">HOURS</span>
+            </div>
+            <div style="text-align: center;">
+                <span id="cd-minutes" style="color: var(--neon-pink); display: block; font-size: 2rem;">00</span>
+                <span style="font-size: 0.6rem; letter-spacing: 2px; color: var(--cyber-blue);">MINS</span>
+            </div>
+            <div style="text-align: center;">
+                <span id="cd-seconds" style="color: var(--neon-pink); display: block; font-size: 2rem;">00</span>
+                <span style="font-size: 0.6rem; letter-spacing: 2px; color: var(--cyber-blue);">SECS</span>
+            </div>
+        </div>
+
         <p class="hero-sub">Decoding how Hackers Exploit Trust, Emotions, and Innocence in the Digital World</p>
 
         <div class="btn-wrap">
             <a href="login.html" class="btn btn-primary">
                 <i data-lucide="terminal-square"></i>
-                Register for certification
+                Register Now
             </a>
         </div>
 
         <div class="floating-heart" style="top: 20%; left: 10%;"><i data-lucide="heart" size="48"></i></div>
-        <div class="floating-heart" style="bottom: 30%; right: 15%; animation-delay: 2s;"><i data-lucide="heart-crack" size="80"></i></div>
-        <div class="floating-heart" style="top: 15%; right: 25%; animation-delay: 1.5s; opacity: 0.1;"><i data-lucide="activity" size="120"></i></div>
+        <div class="floating-heart" style="bottom: 30%; right: 15%; animation-delay: 2s;"><i data-lucide="heart-crack"
+                size="80"></i></div>
+        <div class="floating-heart" style="top: 15%; right: 25%; animation-delay: 1.5s; opacity: 0.1;"><i
+                data-lucide="activity" size="120"></i></div>
     </header>
 
     <div class="mission-brief">
         <div class="scrolling-text">
-            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF THE HEARTBLEED //
-            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF THE HEARTBLEED //
+            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF
+            THE HEARTBLEED //
+            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF
+            THE HEARTBLEED //
         </div>
     </div>
 
@@ -525,27 +598,31 @@
             <span class="section-tag">Target Objectives</span>
             <h2 class="section-title">Digital Defense <br><span style="color: var(--neon-pink)">Matrix</span></h2>
         </div>
-        
+
         <div class="grid">
             <div class="glass-card">
                 <i data-lucide="brain-circuit" size="40" style="color: var(--neon-pink); margin-bottom: 20px;"></i>
                 <h3 class="card-title">Psychological Ops</h3>
-                <p class="card-text">Deconstruct how attackers weaponize trust, fear, and desire to bypass your mental firewalls.</p>
+                <p class="card-text">Deconstruct how attackers weaponize trust, fear, and desire to bypass your mental
+                    firewalls.</p>
             </div>
             <div class="glass-card">
                 <i data-lucide="heart-handshake" size="40" style="color: var(--cyber-blue); margin-bottom: 20px;"></i>
                 <h3 class="card-title">Romance Scams</h3>
-                <p class="card-text">Anatomy of a "Honey Trap". Identifying fake personas in the era of AI-generated faces.</p>
+                <p class="card-text">Anatomy of a "Honey Trap". Identifying fake personas in the era of AI-generated
+                    faces.</p>
             </div>
             <div class="glass-card">
                 <i data-lucide="eye" size="40" style="color: var(--neon-pink); margin-bottom: 20px;"></i>
                 <h3 class="card-title">Live Phishing</h3>
-                <p class="card-text">Witness real-time credential harvesting. See how easily a clone website can deceive you.</p>
+                <p class="card-text">Witness real-time credential harvesting. See how easily a clone website can deceive
+                    you.</p>
             </div>
             <div class="glass-card">
                 <i data-lucide="shield-alert" size="40" style="color: var(--cyber-blue); margin-bottom: 20px;"></i>
                 <h3 class="card-title">Threat Detection</h3>
-                <p class="card-text">Practical OSINT techniques to verify identities and spot red flags before it's too late.</p>
+                <p class="card-text">Practical OSINT techniques to verify identities and spot red flags before it's too
+                    late.</p>
             </div>
         </div>
     </section>
@@ -553,13 +630,15 @@
     <section id="speakers">
         <div class="section-header">
             <span class="section-tag">Mission Command</span>
-            <h2 class="section-title">The <br><span style="-webkit-text-stroke: 1px #fff; color: transparent;">Experts</span></h2>
+            <h2 class="section-title">The <br><span
+                    style="-webkit-text-stroke: 1px #fff; color: transparent;">Experts</span></h2>
         </div>
-        
+
         <div class="grid">
             <div class="speaker-box">
                 <div class="speaker-img-wrapper">
-                    <img src="images/ChatGPT Image Feb 12, 2026, 06_08_45 PM.png" class="speaker-img" alt="Muhammed Nihal">
+                    <img src="images/ChatGPT Image Feb 12, 2026, 06_08_45 PM.png" class="speaker-img"
+                        alt="Muhammed Nihal">
                 </div>
                 <h3 class="speaker-name">Muhammed Nihal</h3>
                 <p class="speaker-role">R&D Division</p>
@@ -572,7 +651,8 @@
                 <p class="speaker-role">Security Researcher</p>
             </div>
             <div class="speaker-box" style="border-style: dashed; opacity: 0.7;">
-                <div class="speaker-img-wrapper" style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); aspect-ratio: 1/1;">
+                <div class="speaker-img-wrapper"
+                    style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); aspect-ratio: 1/1;">
                     <i data-lucide="user-plus" size="48" style="color: var(--neon-pink);"></i>
                 </div>
                 <h3 class="speaker-name">YOU?</h3>
@@ -586,19 +666,20 @@
             <img src="images/Offenso-Logo-White.webp" alt="Offenso" class="footer-logo">
         </div>
         <p class="copyright">&copy; 2026 LOVE AND LIES. POWERED BY OFFENSO HACKERS ACADEMY.</p>
-        <p style="margin-top: 15px; font-weight: 900; color: var(--cyber-blue); letter-spacing: 2px;">#DECODEKOZHIKODE</p>
+        <p style="margin-top: 15px; font-weight: 900; color: var(--cyber-blue); letter-spacing: 2px;">#DECODEKOZHIKODE
+        </p>
     </footer>
 
     <script>
         lucide.createIcons();
-        
+
         // Parallax Effect for Title
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const title = document.querySelector('.title-container');
             const hearts = document.querySelectorAll('.floating-heart');
-            
-            if(title) {
+
+            if (title) {
                 title.style.transform = `translateY(${scrolled * 0.3}px)`;
                 title.style.opacity = 1 - (scrolled / 700);
             }
@@ -608,8 +689,102 @@
                 heart.style.transform = `translateY(${scrolled * speed * -1}px) rotate(${scrolled * 0.1}deg)`;
             });
         });
+
+        // --- Cyber Rain Canvas Effect ---
+        const canvas = document.getElementById('cyber-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01<3LOVE01LIES01<3'; // Matrix characters
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function draw() {
+            // Translucent black background for trail effect
+            ctx.fillStyle = 'rgba(5, 0, 1, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ff0055'; // Neon Pink text
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+
+                // Color variation
+                if (Math.random() > 0.95) ctx.fillStyle = '#00f2ff'; // Cyber Blue
+                else ctx.fillStyle = '#ff0055'; // Neon Pink
+
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Mouse interaction distance check
+                const dx = x - mouseX;
+                const dy = y - mouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                // Displace rain if near mouse
+                let renderX = x;
+                let renderY = y;
+
+                if (dist < 100) {
+                    renderX += (dx / dist) * 20;
+                }
+
+                ctx.fillText(text, renderX, renderY);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // --- Live Countdown Timer ---
+        const countdownDate = new Date("Feb 14, 2026 10:00:00").getTime();
+
+        const updateCountdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("cd-minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("cd-seconds").innerText = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                document.getElementById("countdown").innerHTML = "EVENT LIVE NOW";
+            }
+        }, 1000);
     </script>
 </body>
-</html>
 
-```
+</html>
