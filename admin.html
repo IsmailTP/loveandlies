@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL LOCKED | Admin Intel</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --blood-red: #880808;
@@ -16,13 +18,19 @@
             --error-red: #ff3131;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
         body {
             background-color: var(--dark-pit);
             color: #fff;
             min-height: 100vh;
-            overflow: hidden; /* Prevent scrolling when locked */
+            overflow: hidden;
+            /* Prevent scrolling when locked */
         }
 
         .bg-fx {
@@ -59,9 +67,20 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .lock-title {
@@ -72,7 +91,9 @@
             margin-bottom: 10px;
         }
 
-        .lock-title span { color: var(--neon-pink); }
+        .lock-title span {
+            color: var(--neon-pink);
+        }
 
         .lock-input {
             width: 100%;
@@ -117,7 +138,8 @@
 
         /* --- Dashboard Content (Hidden by default) --- */
         #adminContent {
-            display: none; /* Controlled by JS */
+            display: none;
+            /* Controlled by JS */
         }
 
         nav {
@@ -133,26 +155,109 @@
             z-index: 100;
         }
 
-        .logo { font-family: 'Archivo Black', sans-serif; color: var(--cyber-blue); font-size: 1.5rem; text-decoration: none; }
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--cyber-blue);
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
 
-        .glass-card { background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.1); padding: 25px; border-radius: 4px; position: relative; transition: 0.3s; }
-        .glass-card:hover { border-color: var(--cyber-blue); background: rgba(0, 242, 255, 0.02); transform: translateY(-5px); }
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            padding: 25px;
+            border-radius: 4px;
+            position: relative;
+            transition: 0.3s;
+        }
 
-        .delete-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: 1px solid rgba(255, 49, 49, 0.3); color: var(--error-red); padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-        .delete-btn:hover { background: var(--error-red); color: #fff; box-shadow: 0 0 15px var(--error-red); }
+        .glass-card:hover {
+            border-color: var(--cyber-blue);
+            background: rgba(0, 242, 255, 0.02);
+            transform: translateY(-5px);
+        }
 
-        .card-tag { font-size: 0.6rem; text-transform: uppercase; font-weight: 900; color: var(--cyber-blue); letter-spacing: 2px; margin-bottom: 15px; display: flex; align-items: center; gap: 5px; }
-        .field label { display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 900; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
-        .username-val { font-family: 'Archivo Black', sans-serif; color: var(--neon-pink); font-size: 1.2rem; text-transform: uppercase; }
-        .timestamp { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.7rem; color: rgba(255,255,255,0.3); text-transform: uppercase; display: flex; justify-content: space-between; }
-        
-        #loader { text-align: center; padding: 50px; font-weight: 900; text-transform: uppercase; letter-spacing: 5px; color: var(--cyber-blue); }
+        .delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: 1px solid rgba(255, 49, 49, 0.3);
+            color: var(--error-red);
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: var(--error-red);
+            color: #fff;
+            box-shadow: 0 0 15px var(--error-red);
+        }
+
+        .card-tag {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: var(--cyber-blue);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 4px;
+        }
+
+        .username-val {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .timestamp {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #loader {
+            text-align: center;
+            padding: 50px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--cyber-blue);
+        }
     </style>
 </head>
+
 <body>
 
     <!-- LOCK OVERLAY -->
@@ -160,8 +265,9 @@
         <div class="lock-box">
             <div class="lock-icon"><i data-lucide="lock" size="64"></i></div>
             <h1 class="lock-title">Terminal <span>Locked</span></h1>
-            <p style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px;">Authorization Required to View Intel</p>
-            
+            <p style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px;">Authorization
+                Required to View Intel</p>
+
             <input type="password" id="adminPass" class="lock-input" placeholder="••••••••">
             <button id="unlockBtn" class="lock-btn">Authenticate</button>
             <p id="error-hint">Invalid Access Key. IP Logged.</p>
@@ -174,15 +280,20 @@
         <nav>
             <a href="index.html" class="logo">L&L</a>
             <div style="display: flex; gap: 20px; align-items: center;">
-                <span id="adminName" style="font-size: 0.7rem; font-weight: 900; color: var(--neon-pink);">ROOT@ADMIN</span>
-                <button onclick="logoutAdmin()" style="background: none; border: 1px solid #fff; color: #fff; padding: 5px 10px; cursor: pointer; font-size: 0.6rem; font-weight: 900;">LOCK</button>
+                <span id="adminName"
+                    style="font-size: 0.7rem; font-weight: 900; color: var(--neon-pink);">ROOT@ADMIN</span>
+                <button onclick="logoutAdmin()"
+                    style="background: none; border: 1px solid #fff; color: #fff; padding: 5px 10px; cursor: pointer; font-size: 0.6rem; font-weight: 900;">LOCK</button>
             </div>
         </nav>
 
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
-                <h1 style="font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem, 8vw, 4rem); text-transform: uppercase;">Intel <span>Stream</span></h1>
-                <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">Decrypted Live Feed</p>
+                <h1
+                    style="font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem, 8vw, 4rem); text-transform: uppercase;">
+                    Intel <span>Stream</span></h1>
+                <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">Decrypted
+                    Live Feed</p>
             </div>
 
             <div id="loader">Syncing with encrypted database...</div>
@@ -226,7 +337,7 @@
             startDataStream(); // Only fetch data after unlock
         }
 
-        window.logoutAdmin = function() {
+        window.logoutAdmin = function () {
             sessionStorage.removeItem('adminAuth');
             location.reload();
         }
@@ -265,15 +376,28 @@
                     const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'PENDING...';
                     const card = document.createElement('div');
                     card.className = 'glass-card';
+
+                    let photoDisplay = `<div style="width: 50px; height: 50px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; border: 1px solid var(--cyber-blue);"><i data-lucide="user"></i></div>`;
+                    if (data.photoURL) {
+                        photoDisplay = `<img src="${data.photoURL}" style="width: 50px; height: 50px; object-fit: cover; border: 1px solid var(--neon-pink);">`;
+                    }
+
                     card.innerHTML = `
                         <button class="delete-btn" data-id="${snapshotDoc.id}"><i data-lucide="trash-2" size="16"></i></button>
                         <div class="card-tag"><i data-lucide="shield"></i> VERIFIED</div>
-                        <div class="field"><label>Username</label><p class="username-val">${data.username}</p></div>
+                        
+                        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                            ${photoDisplay}
+                            <div>
+                                <div class="field"><label>Username</label><p class="username-val">${data.username}</p></div>
+                            </div>
+                        </div>
+
                         <div class="field"><label>Full Name</label><p>${data.fullName}</p></div>
                         <div class="field"><label>Email</label><p>${data.email}</p></div>
                         <div class="field"><label>Phone</label><p>${data.phone}</p></div>
-                        <div class="field"><label>Location</label><p>${data.address}</p></div>
-                        <div class="timestamp"><span>ID: ${snapshotDoc.id.substring(0,6)}</span><span>${date}</span></div>
+                        <div class="field"><label>Role</label><p style="color: var(--neon-pink);">Operative</p></div>
+                        <div class="timestamp"><span>ID: ${snapshotDoc.id.substring(0, 6)}</span><span>${date}</span></div>
                     `;
                     dataGrid.appendChild(card);
                 });
@@ -293,4 +417,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>
