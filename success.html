@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SECURED | Love & Lies</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --blood-red: #880808;
@@ -89,11 +91,26 @@
         }
 
         @keyframes textGlitch {
-            0% { transform: skew(0deg); }
-            10% { transform: skew(2deg); opacity: 0.8; }
-            15% { transform: skew(-3deg); }
-            20% { transform: skew(0deg); }
-            100% { transform: skew(0deg); }
+            0% {
+                transform: skew(0deg);
+            }
+
+            10% {
+                transform: skew(2deg);
+                opacity: 0.8;
+            }
+
+            15% {
+                transform: skew(-3deg);
+            }
+
+            20% {
+                transform: skew(0deg);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
         }
 
         /* --- Heart Animation --- */
@@ -105,36 +122,93 @@
         }
 
         @keyframes heartBeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.3);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            60% {
+                transform: scale(1);
+            }
         }
 
-        /* --- The "Ticket" Card --- */
-        .ticket-card {
-            background: var(--glass);
+        /* --- Holographic Card --- */
+        .holo-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .holo-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
             position: relative;
-            border-radius: 4px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            text-align: left;
         }
 
-        .ticket-card::before {
+        /* Holographic Sheen */
+        .holo-card::before {
             content: "";
             position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
-            background: var(--cyber-blue);
-            box-shadow: 0 0 15px var(--cyber-blue);
+            inset: 0;
+            background: linear-gradient(115deg,
+                    transparent 0%,
+                    rgba(0, 242, 255, 0.3) 30%,
+                    rgba(255, 0, 85, 0.3) 70%,
+                    transparent 100%);
+            opacity: 0.5;
+            mix-blend-mode: overlay;
+            z-index: 2;
+            pointer-events: none;
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .holo-card:hover::before {
+            transform: translateX(100%);
+            transition: transform 1s;
+        }
+
+        /* Glare Effect */
+        .card-glare {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 3;
+            transition: opacity 0.2s;
+            mix-blend-mode: hard-light;
+        }
+
+        /* Floating Elements inside Card */
+        .card-content {
+            transform: translateZ(30px);
+            /* Lifts content off card */
+            position: relative;
+            z-index: 5;
         }
 
         .ticket-header {
-            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 15px;
             margin-bottom: 20px;
             display: flex;
@@ -145,117 +219,216 @@
         .ticket-title {
             font-family: 'Archivo Black', sans-serif;
             text-transform: uppercase;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             letter-spacing: 1px;
+            background: linear-gradient(90deg, #fff, #bbb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .info-row {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .info-label {
             display: block;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 900;
             color: var(--cyber-blue);
             letter-spacing: 2px;
+            margin-bottom: 5px;
         }
 
         .info-value {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 900;
             text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .btn-home {
             width: 100%;
-            background: var(--neon-pink);
-            color: #fff;
-            border: none;
+            background: rgba(255, 0, 85, 0.1);
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
             padding: 15px;
             font-family: 'Archivo Black', sans-serif;
             text-transform: uppercase;
-            margin-top: 20px;
+            margin-top: 25px;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            font-size: 1rem;
         }
 
         .btn-home:hover {
-            background: #fff;
-            color: var(--neon-pink);
-            box-shadow: 0 0 20px #fff;
+            background: var(--neon-pink);
+            color: #fff;
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateZ(20px);
         }
 
         .status-badge {
             display: inline-block;
-            background: rgba(0, 242, 255, 0.1);
-            color: var(--cyber-blue);
-            padding: 4px 10px;
-            font-size: 0.6rem;
+            background: var(--neon-pink);
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 0.7rem;
             font-weight: 900;
-            border: 1px solid var(--cyber-blue);
             text-transform: uppercase;
+            box-shadow: 0 0 15px var(--neon-pink);
+            transform: rotate(-2deg);
+        }
+
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #000;
+            border: 2px solid var(--cyber-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
         }
     </style>
 </head>
+
 <body>
 
-    <div class="bg-fx"><div class="heart-grid"></div></div>
+    <div class="bg-fx">
+        <div class="heart-grid"></div>
+    </div>
 
     <div class="success-wrap">
-        <i data-lucide="heart" class="heart-icon" fill="currentColor" size="64"></i>
-        
-        <h1 class="glitch-header">
-            <span class="text-secured">System</span>
-            <span class="and-box">AND</span>
-            <span class="text-locked">Locked</span>
+        <i data-lucide="shield-check" class="heart-icon" fill="currentColor" size="64"
+            style="color: var(--cyber-blue); filter: drop-shadow(0 0 20px var(--cyber-blue));"></i>
+
+        <h1 class="glitch-header" style="font-size: clamp(2rem, 8vw, 4rem);">
+            <span class="text-secured">Identity</span>
+            <span class="text-locked"
+                style="color: var(--cyber-blue); text-shadow: 0 0 20px var(--cyber-blue);">Verified</span>
         </h1>
 
-        <div class="ticket-card">
-            <div class="ticket-header">
-                <span class="ticket-title">Entrance Intel</span>
-                <span class="status-badge">Identity Confirmed</span>
-            </div>
+        <div class="holo-container">
+            <div class="holo-card" id="holoCard">
+                <div class="card-glare"></div>
 
-            <div class="info-row">
-                <span class="info-label">Operation</span>
-                <div class="info-value">Love & Lies Workshop</div>
-            </div>
+                <div class="card-content">
+                    <div class="ticket-header">
+                        <div class="ticket-title">Access Pass</div>
+                        <span class="status-badge">Cleared</span>
+                    </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div class="info-row">
-                    <span class="info-label">Date</span>
-                    <div class="info-value">14.02.26</div>
+                    <div style="display: flex; gap: 20px; align-items: flex-start;">
+                        <div class="avatar-placeholder">
+                            <i data-lucide="user" size="40" color="white"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="info-row">
+                                <span class="info-label">Operative</span>
+                                <div class="info-value">Command Center</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="info-row">
+                            <span class="info-label">Clearance</span>
+                            <div class="info-value" style="color: var(--neon-pink);">Level 5</div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Session ID</span>
+                            <div class="info-value">#X99-26</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-home" onclick="window.location.href='index.html'">
+                        <i data-lucide="arrow-left"></i>
+                        Return to HQ
+                    </button>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">Time Sync</span>
-                    <div class="info-value">10:00 AM</div>
-                </div>
             </div>
-
-            <div class="info-row">
-                <span class="info-label">Secure Link</span>
-                <div class="info-value" style="font-size: 0.8rem; opacity: 0.7;">Sent to Encrypted Inbox</div>
-            </div>
-
-            <button class="btn-home" onclick="window.location.href='index.html'">
-                <i data-lucide="shield-check"></i>
-                Return to Network
-            </button>
         </div>
 
-        <p style="margin-top: 30px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.4;">
+        <p style="margin-top: 40px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.4;">
             #DECODEKOZHIKODE | OFFENSO ACADEMY
         </p>
     </div>
 
     <script>
         lucide.createIcons();
+
+        // --- Holographic Tilt Effect ---
+        const card = document.getElementById('holoCard');
+        const container = document.querySelector('.holo-container');
+        const glare = document.querySelector('.card-glare');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate rotation (center is 0)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg rotation
+            const rotateY = ((x - centerX) / centerX) * 15;
+
+            // Apply rotation
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // Move Glare
+            glare.style.opacity = '1';
+            glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.2), transparent 70%)`;
+        });
+
+        // Reset on mouse leave
+        container.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0) rotateY(0)';
+            glare.style.opacity = '0';
+        });
+
+        // --- Load User Data ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const userData = localStorage.getItem('currentUser');
+            if (userData) {
+                const user = JSON.parse(userData);
+
+                // Update Name (Operative)
+                const operativeEl = document.querySelector('.info-value');
+                // Note: The first .info-value is inside the first flex div, which corresponds to Operative Name in previous structure. 
+                // Let's be more specific with selectors or update structure if needed. 
+                // Actually, looking at the structure: 
+                // The "Operative" label is followed by "Command Center" div.
+                // We want to replace "Command Center" with User's Name.
+
+                // Let's target by text content or structure for precision.
+                const infoValues = document.querySelectorAll('.info-value');
+                // 0: Operative Name (Currently "Command Center")
+                // 1: Clearance ("Level 5")
+                // 2: Session ID ("#X99-26")
+
+                if (infoValues[0]) infoValues[0].innerText = user.fullName || "UNKNOWN AGENT";
+                if (infoValues[1]) infoValues[1].innerText = "Level " + (Math.floor(Math.random() * 5) + 1); // Randomized level
+                if (infoValues[2]) infoValues[2].innerText = "#" + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+                // Update Photo
+                if (user.photoURL) {
+                    const avatarPlace = document.querySelector('.avatar-placeholder');
+                    avatarPlace.innerHTML = `<img src="${user.photoURL}" style="width:100%; height:100%; object-fit:cover;">`;
+                    avatarPlace.style.border = "2px solid var(--neon-pink)";
+                }
+            }
+        });
     </script>
 </body>
+
 </html>
