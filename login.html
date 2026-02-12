@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVE ACCESS | Secure Entry</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #880808;
+            --neon-pink: #ff0055;
+            --cyber-blue: #00f2ff;
+            --dark-pit: #050001;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --error-red: #ff3333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-pit);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Background Effects --- */
+        .bg-fx {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #200005 0%, #050001 100%);
+        }
+
+        .heart-grid {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 35l-1.45-1.32C13.4 29.11 10 26.03 10 22.35c0-3.02 2.38-5.4 5.4-5.4 1.71 0 3.35.79 4.6 2.05 1.25-1.26 2.89-2.05 4.6-2.05 3.02 0 5.4 2.38 5.4 5.4 0 3.68-3.4 6.76-8.55 11.33L20 35z' fill='%23ff0055' fill-opacity='0.05'/%3E%3C/svg%3E");
+            mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 0, 1, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 0, 85, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        /* --- Login Container --- */
+        .login-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 60px;
+        }
+
+        .header-wrap {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .glitch-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .glitch-title span {
+            display: block;
+        }
+
+        .love-text {
+            color: var(--neon-pink);
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+        }
+
+        .access-text {
+            color: #fff;
+            position: relative;
+        }
+
+        .access-text::after {
+            content: "ACCESS";
+            position: absolute;
+            left: 2px;
+            top: 0;
+            color: var(--cyber-blue);
+            opacity: 0.7;
+            z-index: -1;
+            animation: glitch 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 2px)
+            }
+
+            40% {
+                transform: translate(-2px, -2px)
+            }
+
+            60% {
+                transform: translate(2px, 2px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
+        }
+
+        .subheading {
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+
+        /* --- Form Styling --- */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+            color: var(--neon-pink);
+            letter-spacing: 1px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 85, 0.05);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+        }
+
+        /* --- Validation & Enhancement Styles --- */
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 5px;
+            display: block;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group.error .error-message {
+            opacity: 1;
+            height: auto;
+            padding-top: 4px;
+        }
+
+        .input-group.error input,
+        .input-group.error textarea {
+            border-color: var(--error-red);
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.2);
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .btn-enter {
+            width: 100%;
+            padding: 18px;
+            background: var(--neon-pink);
+            color: #fff;
+            border: none;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-enter:hover:not(:disabled) {
+            transform: scale(1.02) rotate(-0.5deg);
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.6);
+        }
+
+        .btn-enter:disabled {
+            background: #333;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+        }
+
+        /* Success Message */
+        #success-msg {
+            display: none;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--cyber-blue);
+            color: var(--cyber-blue);
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 25px;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-fx">
+        <div class="heart-grid"></div>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo">L&L</a>
+        <i data-lucide="shield-check" style="color: var(--neon-pink);"></i>
+    </nav>
+
+    <div class="login-section">
+        <div class="header-wrap">
+            <h1 class="glitch-title">
+                <span class="love-text">Love</span>
+                <span class="access-text">Access</span>
+            </h1>
+            <p class="subheading">Secure Identity Verification Required</p>
+        </div>
+
+        <div class="glass-card">
+            <div id="success-msg">Access Granted. Intel Stored.</div>
+
+            <form id="registrationForm" novalidate>
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="AGENT_NAME" autocomplete="off">
+                    <span class="error-message">Invalid Syntax: Alphanumeric only (3-15 chars)</span>
+                </div>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="JOHN DOE" autocomplete="name">
+                    <span class="error-message">Identity Error: Full name required</span>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="SECURE@MAIL.COM" autocomplete="email">
+                    <span class="error-message">Protocol Fail: Invalid Email Format</span>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+                    <span class="error-message">Comms Error: Invalid Phone Sequence</span>
+                </div>
+                <div class="input-group">
+                    <label>Physical Address</label>
+                    <textarea id="address" placeholder="COORDINATES / STREET ADDRESS"></textarea>
+                    <span class="error-message">Location Data Missing or Too Short</span>
+                </div>
+
+                <button type="submit" class="btn-enter" id="submitBtn">
+                    <i data-lucide="key"></i>
+                    <span id="btnText">Enter the Network</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4yQEux_k2SUv1_VnO01nEUa6OmtfhfOs",
+            authDomain: "love-and-lies.firebaseapp.com",
+            projectId: "love-and-lies",
+            storageBucket: "love-and-lies.firebasestorage.app",
+            messagingSenderId: "131638687012",
+            appId: "1:131638687012:web:13545ed4025dcd1df9afb1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const form = document.getElementById('registrationForm');
+        const successMsg = document.getElementById('success-msg');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+
+        // --- Strict Validation Logic ---
+        const patterns = {
+            username: /^[a-zA-Z0-9_]{3,15}$/, // Alphanumeric + underscore, 3-15 chars
+            fullName: /^[a-zA-Z\s]{2,50}$/, // Letters and spaces only
+            email: /^([a-z0-9\.-]+)@([a-z0-9-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+            phone: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, // Flexible but strict on digits
+        };
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const id = field.id;
+            const parent = field.parentElement;
+            let isValid = true;
+
+            if (patterns[id]) {
+                isValid = patterns[id].test(value);
+            } else if (id === 'address') {
+                isValid = value.length >= 10; // Address must be meaningful
+            }
+
+            if (isValid) {
+                parent.classList.remove('error');
+            } else {
+                parent.classList.add('error');
+            }
+            return isValid;
+        }
+
+        // Real-time validation removal (UX Enhancement)
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                // Remove error style as soon as user types
+                if (input.parentElement.classList.contains('error')) {
+                    input.parentElement.classList.remove('error');
+                }
+            });
+
+            // Validate on blur (when clicking away)
+            input.addEventListener('blur', () => {
+                if (input.value.trim() !== "") {
+                    validateField(input);
+                }
+            });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            let isFormValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) isFormValid = false;
+            });
+
+            if (!isFormValid) {
+                // Cyberpunk visual feedback: Shake the form slightly (optional, currently handled by CSS per input)
+                return;
+            }
+
+            // UX: Loading State
+            submitBtn.disabled = true;
+            btnText.innerText = "TRANSMITTING...";
+
+            const userData = {
+                username: document.getElementById('username').value.trim(),
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "registrations"), userData);
+
+                // Redirect to success page
+                window.location.href = "success.html";
+            } catch (error) {
+                console.error("Error saving document: ", error);
+                alert("Critical System Failure: Data not transmitted.");
+                submitBtn.disabled = false;
+                btnText.innerText = "RETRY ACCESS";
+            }
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

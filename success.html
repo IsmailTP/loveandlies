@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURED | Love & Lies</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #880808;
+            --neon-pink: #ff0055;
+            --cyber-blue: #00f2ff;
+            --dark-pit: #050001;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-pit);
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Background Effects --- */
+        .bg-fx {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #200005 0%, #050001 100%);
+        }
+
+        .heart-grid {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 35l-1.45-1.32C13.4 29.11 10 26.03 10 22.35c0-3.02 2.38-5.4 5.4-5.4 1.71 0 3.35.79 4.6 2.05 1.25-1.26 2.89-2.05 4.6-2.05 3.02 0 5.4 2.38 5.4 5.4 0 3.68-3.4 6.76-8.55 11.33L20 35z' fill='%23ff0055' fill-opacity='0.05'/%3E%3C/svg%3E");
+            mask-image: radial-gradient(circle, black, transparent 80%);
+        }
+
+        /* --- Success Hero --- */
+        .success-wrap {
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .glitch-header {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 12vw, 7rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .text-secured {
+            color: #fff;
+            display: block;
+        }
+
+        .and-box {
+            font-size: 0.2em;
+            background: #fff;
+            color: var(--dark-pit);
+            padding: 5px 15px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 10px 0;
+        }
+
+        .text-locked {
+            color: var(--neon-pink);
+            display: block;
+            text-shadow: 0 0 20px var(--neon-pink);
+            animation: textGlitch 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes textGlitch {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(2deg); opacity: 0.8; }
+            15% { transform: skew(-3deg); }
+            20% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* --- Heart Animation --- */
+        .heart-icon {
+            color: var(--neon-pink);
+            filter: drop-shadow(0 0 15px var(--neon-pink));
+            animation: heartBeat 0.8s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+            margin-bottom: 20px;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        /* --- The "Ticket" Card --- */
+        .ticket-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .ticket-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--cyber-blue);
+            box-shadow: 0 0 15px var(--cyber-blue);
+        }
+
+        .ticket-header {
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-title {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: var(--cyber-blue);
+            letter-spacing: 2px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .btn-home {
+            width: 100%;
+            background: var(--neon-pink);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-home:hover {
+            background: #fff;
+            color: var(--neon-pink);
+            box-shadow: 0 0 20px #fff;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--cyber-blue);
+            padding: 4px 10px;
+            font-size: 0.6rem;
+            font-weight: 900;
+            border: 1px solid var(--cyber-blue);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-fx"><div class="heart-grid"></div></div>
+
+    <div class="success-wrap">
+        <i data-lucide="heart" class="heart-icon" fill="currentColor" size="64"></i>
+        
+        <h1 class="glitch-header">
+            <span class="text-secured">System</span>
+            <span class="and-box">AND</span>
+            <span class="text-locked">Locked</span>
+        </h1>
+
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <span class="ticket-title">Entrance Intel</span>
+                <span class="status-badge">Identity Confirmed</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Operation</span>
+                <div class="info-value">Love & Lies Workshop</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="info-row">
+                    <span class="info-label">Date</span>
+                    <div class="info-value">14.02.26</div>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Time Sync</span>
+                    <div class="info-value">10:00 AM</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Secure Link</span>
+                <div class="info-value" style="font-size: 0.8rem; opacity: 0.7;">Sent to Encrypted Inbox</div>
+            </div>
+
+            <button class="btn-home" onclick="window.location.href='index.html'">
+                <i data-lucide="shield-check"></i>
+                Return to Network
+            </button>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.4;">
+            #DECODEKOZHIKODE | OFFENSO ACADEMY
+        </p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

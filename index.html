@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVE AND LIES | Cyber Awareness Workshop</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #880808;
+            --neon-pink: #ff0055;
+            --cyber-blue: #00f2ff;
+            --dark-pit: #050001;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 0, 85, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-pit);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* --- CRT Scanline Effect --- */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* --- Background Effects --- */
+        .bg-fx {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #200005 0%, #050001 100%);
+        }
+
+        .heart-grid {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 35l-1.45-1.32C13.4 29.11 10 26.03 10 22.35c0-3.02 2.38-5.4 5.4-5.4 1.71 0 3.35.79 4.6 2.05 1.25-1.26 2.89-2.05 4.6-2.05 3.02 0 5.4 2.38 5.4 5.4 0 3.68-3.4 6.76-8.55 11.33L20 35z' fill='%23ff0055' fill-opacity='0.05'/%3E%3C/svg%3E");
+            mask-image: linear-gradient(to bottom, black, transparent);
+            animation: pulseGrid 4s infinite alternate;
+        }
+
+        @keyframes pulseGrid {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 0, 1, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+
+        .nav-hashtag {
+            font-weight: 900; 
+            font-size: 0.75rem; 
+            letter-spacing: 2px; 
+            color: var(--cyber-blue);
+            border: 1px solid var(--cyber-blue);
+            padding: 4px 10px;
+            border-radius: 50px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-label {
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: 5px; 
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            border-bottom: 2px solid var(--neon-pink);
+            padding-bottom: 5px;
+        }
+
+        .hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3.5rem, 13vw, 9rem);
+            line-height: 0.85;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            margin: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .love {
+            color: var(--neon-pink);
+            display: block;
+            text-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
+        }
+
+        .and-box {
+            font-size: 0.25em;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 10px 0;
+            transform: skewX(-10deg);
+        }
+
+        .lies {
+            color: #fff;
+            display: block;
+            position: relative;
+        }
+
+        .lies::after {
+            content: "LIES";
+            position: absolute;
+            left: 3px;
+            top: 0;
+            color: var(--cyber-blue);
+            z-index: -1;
+            opacity: 0.8;
+            mix-blend-mode: hard-light;
+            animation: glitch 2.5s infinite steps(2, start) alternate-reverse;
+        }
+
+        .lies::before {
+            content: "LIES";
+            position: absolute;
+            left: -3px;
+            top: 0;
+            color: var(--blood-red);
+            z-index: -1;
+            opacity: 0.8;
+            mix-blend-mode: hard-light;
+            animation: glitch 3s infinite steps(1, start) reverse;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); transform: translate(-3px, 3px) }
+            40% { clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%); transform: translate(3px, -3px) }
+            60% { clip-path: polygon(0 60%, 100% 60%, 100% 90%, 0 90%); transform: translate(-3px, 3px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .hero-sub {
+            font-weight: 700;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-top: 2rem;
+            letter-spacing: 1px;
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            max-width: 700px;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.1), transparent);
+            padding: 10px;
+        }
+
+        /* --- New Mission Brief Bar --- */
+        .mission-brief {
+            width: 100%;
+            background: var(--neon-pink);
+            color: white;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            box-shadow: 0 0 30px var(--neon-pink);
+            margin-top: 40px;
+            transform: rotate(-1deg);
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- Buttons --- */
+        .btn-wrap {
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--neon-pink);
+            border: 2px solid var(--neon-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--neon-pink);
+            z-index: -1;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            box-shadow: 5px 5px 0px var(--cyber-blue);
+            transform: translate(-3px, -3px);
+        }
+
+        /* --- Content Sections --- */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            border-left: 5px solid var(--neon-pink);
+            padding-left: 20px;
+        }
+
+        .section-tag {
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* --- Tech Cards --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            position: relative;
+            transition: 0.3s;
+            /* Cyber cut corners */
+            clip-path: polygon(
+                20px 0, 100% 0, 
+                100% calc(100% - 20px), calc(100% - 20px) 100%, 
+                0 100%, 0 20px
+            );
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 0, 85, 0.1);
+            border-color: var(--neon-pink);
+            transform: translateY(-5px);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 20px; height: 20px;
+            border-top: 2px solid var(--neon-pink);
+            border-left: 2px solid var(--neon-pink);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        
+        .glass-card:hover::before { opacity: 1; }
+
+        .card-title {
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .card-text {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+
+        /* --- Speaker Styles --- */
+        .speaker-box {
+            position: relative;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .speaker-box:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+        }
+
+        .speaker-img-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            padding: 5px;
+        }
+
+        .speaker-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.2);
+            display: block;
+            transition: 0.5s;
+        }
+
+        .speaker-box:hover .speaker-img {
+            filter: grayscale(0);
+        }
+
+        /* Target Reticle corners for image */
+        .speaker-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid transparent;
+            border-top-color: var(--neon-pink);
+            border-bottom-color: var(--neon-pink);
+            clip-path: polygon(0 0, 20px 0, 20px 100%, 0 100%, 0 20px, 100% 20px, 100% calc(100% - 20px), 0 calc(100% - 20px));
+            opacity: 0.5;
+        }
+
+        .speaker-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .speaker-role {
+            color: var(--neon-pink);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .speaker-role::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--cyber-blue);
+        }
+
+        /* --- Floating Elements --- */
+        .floating-heart {
+            position: absolute;
+            color: var(--neon-pink);
+            opacity: 0.15;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(to top, #000, rgba(5, 0, 1, 0));
+        }
+        
+        .footer-logo {
+            height: 40px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+
+        .copyright {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-fx">
+        <div class="heart-grid"></div>
+    </div>
+
+    <nav>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="#" class="logo">L<span style="color:white">&</span>L</a>
+            <span class="nav-hashtag">#DECODEKOZHIKODE</span>
+        </div>
+        <div>
+            <a href="login.html" style="text-decoration: none; color: #fff; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="lock" size="16" style="color: var(--neon-pink);"></i> Login
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <span class="hero-label">Cyber Awareness / Social Engineering Workshop</span>
+        <div class="title-container">
+            <h1 class="hero-title">
+                <span class="love">Love</span>
+                <span class="and-box">AND</span>
+                <span class="lies">Lies</span>
+            </h1>
+        </div>
+        
+        <p class="hero-sub">Decoding how Hackers Exploit Trust, Emotions, and Innocence in the Digital World</p>
+
+        <div class="btn-wrap">
+            <a href="login.html" class="btn btn-primary">
+                <i data-lucide="terminal-square"></i>
+                Register for certification
+            </a>
+        </div>
+
+        <div class="floating-heart" style="top: 20%; left: 10%;"><i data-lucide="heart" size="48"></i></div>
+        <div class="floating-heart" style="bottom: 30%; right: 15%; animation-delay: 2s;"><i data-lucide="heart-crack" size="80"></i></div>
+        <div class="floating-heart" style="top: 15%; right: 25%; animation-delay: 1.5s; opacity: 0.1;"><i data-lucide="activity" size="120"></i></div>
+    </header>
+
+    <div class="mission-brief">
+        <div class="scrolling-text">
+            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF THE HEARTBLEED //
+            // STATUS: OPEN // DATE: FEB 14, 2026 // TIME: 10:00 AM - 01:00 PM // LOCATION: OFFENSO ACADEMY // BEWARE OF THE HEARTBLEED //
+        </div>
+    </div>
+
+    <section id="outcomes">
+        <div class="section-header">
+            <span class="section-tag">Target Objectives</span>
+            <h2 class="section-title">Digital Defense <br><span style="color: var(--neon-pink)">Matrix</span></h2>
+        </div>
+        
+        <div class="grid">
+            <div class="glass-card">
+                <i data-lucide="brain-circuit" size="40" style="color: var(--neon-pink); margin-bottom: 20px;"></i>
+                <h3 class="card-title">Psychological Ops</h3>
+                <p class="card-text">Deconstruct how attackers weaponize trust, fear, and desire to bypass your mental firewalls.</p>
+            </div>
+            <div class="glass-card">
+                <i data-lucide="heart-handshake" size="40" style="color: var(--cyber-blue); margin-bottom: 20px;"></i>
+                <h3 class="card-title">Romance Scams</h3>
+                <p class="card-text">Anatomy of a "Honey Trap". Identifying fake personas in the era of AI-generated faces.</p>
+            </div>
+            <div class="glass-card">
+                <i data-lucide="eye" size="40" style="color: var(--neon-pink); margin-bottom: 20px;"></i>
+                <h3 class="card-title">Live Phishing</h3>
+                <p class="card-text">Witness real-time credential harvesting. See how easily a clone website can deceive you.</p>
+            </div>
+            <div class="glass-card">
+                <i data-lucide="shield-alert" size="40" style="color: var(--cyber-blue); margin-bottom: 20px;"></i>
+                <h3 class="card-title">Threat Detection</h3>
+                <p class="card-text">Practical OSINT techniques to verify identities and spot red flags before it's too late.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers">
+        <div class="section-header">
+            <span class="section-tag">Mission Command</span>
+            <h2 class="section-title">The <br><span style="-webkit-text-stroke: 1px #fff; color: transparent;">Experts</span></h2>
+        </div>
+        
+        <div class="grid">
+            <div class="speaker-box">
+                <div class="speaker-img-wrapper">
+                    <img src="images/ChatGPT Image Feb 12, 2026, 06_08_45 PM.png" class="speaker-img" alt="Muhammed Nihal">
+                </div>
+                <h3 class="speaker-name">Muhammed Nihal</h3>
+                <p class="speaker-role">R&D Division</p>
+            </div>
+            <div class="speaker-box">
+                <div class="speaker-img-wrapper">
+                    <img src="images/ChatGPT Image Feb 12, 2026, 06_06_43 PM.png" class="speaker-img" alt="Sibin Baby">
+                </div>
+                <h3 class="speaker-name">Sibin Baby</h3>
+                <p class="speaker-role">Security Researcher</p>
+            </div>
+            <div class="speaker-box" style="border-style: dashed; opacity: 0.7;">
+                <div class="speaker-img-wrapper" style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); aspect-ratio: 1/1;">
+                    <i data-lucide="user-plus" size="48" style="color: var(--neon-pink);"></i>
+                </div>
+                <h3 class="speaker-name">YOU?</h3>
+                <p class="speaker-role">Future Defender</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div style="margin-bottom: 25px;">
+            <img src="images/Offenso-Logo-White.webp" alt="Offenso" class="footer-logo">
+        </div>
+        <p class="copyright">&copy; 2026 LOVE AND LIES. POWERED BY OFFENSO HACKERS ACADEMY.</p>
+        <p style="margin-top: 15px; font-weight: 900; color: var(--cyber-blue); letter-spacing: 2px;">#DECODEKOZHIKODE</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Parallax Effect for Title
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const title = document.querySelector('.title-container');
+            const hearts = document.querySelectorAll('.floating-heart');
+            
+            if(title) {
+                title.style.transform = `translateY(${scrolled * 0.3}px)`;
+                title.style.opacity = 1 - (scrolled / 700);
+            }
+
+            hearts.forEach((heart, index) => {
+                const speed = (index + 1) * 0.1;
+                heart.style.transform = `translateY(${scrolled * speed * -1}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
+
+```
