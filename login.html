@@ -369,7 +369,7 @@
                     <span class="error-message">Comms Error: Invalid Phone Sequence</span>
                 </div>
                 <div class="input-group">
-                    <label>Profile Photo</label>
+                    <label>Profile Photo (Optional)</label>
                     <input type="file" id="profilePhoto" accept="image/*" style="padding: 10px; cursor: pointer;">
                     <span class="error-message">Upload Error: File too large (Max 200KB)</span>
                 </div>
@@ -420,7 +420,7 @@
             if (patterns[id]) {
                 isValid = patterns[id].test(value);
             } else if (id === 'profilePhoto') {
-                isValid = field.files.length > 0; // Must upload a file
+                isValid = true; // Optional
             }
 
             if (isValid) {
@@ -466,10 +466,7 @@
             });
 
             const photoInput = document.getElementById('profilePhoto');
-            if (photoInput.files.length === 0) {
-                photoInput.parentElement.classList.add('error');
-                isFormValid = false;
-            }
+            // Photo is optional
 
             // File Size Check (Max 200KB)
             if (photoInput.files[0] && photoInput.files[0].size > 200 * 1024) {
@@ -486,7 +483,10 @@
             btnText.innerText = "ENCRYPTING DATA...";
 
             try {
-                const base64Photo = await convertToBase64(photoInput.files[0]);
+                let base64Photo = "";
+                if (photoInput.files.length > 0) {
+                    base64Photo = await convertToBase64(photoInput.files[0]);
+                }
 
                 const userData = {
                     username: document.getElementById('username').value.trim(),
